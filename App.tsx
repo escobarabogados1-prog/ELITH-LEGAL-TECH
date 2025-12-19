@@ -1,152 +1,180 @@
 import React, { useState } from 'react';
-import { AppView } from './types';
-import Home from './Home';
-import LegalChatbot from './LegalChatbot';
-import { Scale, ArrowLeft, TrendingDown, HeartOff, Landmark, ShieldCheck } from 'lucide-react';
+import { 
+  Scale, ArrowLeft, TrendingDown, HeartOff, 
+  Landmark, ShieldCheck, ChevronRight, MessageCircle, Send,
+  FileText, Briefcase, Award
+} from 'lucide-react';
 
-const App = () => {
-  const [activeView, setActiveView] = useState<AppView>(AppView.HOME);
+// --- 1. CONFIGURACIÓN DE VISTAS ---
+type View = 'home' | 'creditos' | 'divorcio' | 'proteccion' | 'marcas';
 
-  // Función para renderizar el contenido según la unidad de negocio
-  const renderBusinessUnit = () => {
-    switch (activeView) {
-      case AppView.CREDITOS_VIVIENDA:
-        return (
-          <div className="grid lg:grid-cols-2 gap-12 items-start animate-in fade-in duration-500">
-            <div className="space-y-8">
-              <div className="inline-flex items-center gap-2 bg-amber-100 text-amber-700 px-4 py-2 rounded-lg font-bold text-sm">
-                <TrendingDown size={18} /> LEY DE VIVIENDA 546 DE 1999
-              </div>
-              <h2 className="text-4xl font-serif font-bold text-slate-900">Reducción de Créditos e Intereses</h2>
-              <p className="text-lg text-slate-600 leading-relaxed">
-                No permita que los intereses consuman su patrimonio. Analizamos su extracto para reducir el tiempo de su deuda hasta en un 40% sin afectar su flujo de caja mensual.
-              </p>
-              <div className="bg-white p-6 rounded-2xl border-l-8 border-amber-500 shadow-sm space-y-4">
-                <h4 className="font-bold">¿Qué logramos para usted?</h4>
-                <ul className="space-y-2 text-slate-600 text-sm">
-                  <li>• Ahorro real de millones en intereses bancarios.</li>
-                  <li>• Reducción de años en el plazo de su hipoteca o leasing.</li>
-                  <li>• Seguridad jurídica mediante procesos de ley vigentes.</li>
-                </ul>
-              </div>
-            </div>
-            <LegalChatbot 
-              businessUnit="Reducción de Créditos" 
-              contextMessage="Hola. Soy el asistente especializado en Ley de Vivienda. ¿Desea saber cuánto puede ahorrar en su crédito hoy?" 
-            />
-          </div>
-        );
+// --- 2. COMPONENTE: EJE DE SERVICIO (CHATBOT + WHATSAPP) ---
+const ChatbotEje = ({ unidad, mensaje }: { unidad: string, mensaje: string }) => {
+  const [msg, setMsg] = useState('');
+  const celular = "573167824217";
 
-      case AppView.DIVORCIO:
-        return (
-          <div className="grid lg:grid-cols-2 gap-12 items-start animate-in fade-in duration-500">
-            <div className="space-y-8">
-              <div className="inline-flex items-center gap-2 bg-red-100 text-red-700 px-4 py-2 rounded-lg font-bold text-sm">
-                <HeartOff size={18} /> DERECHO DE FAMILIA
-              </div>
-              <h2 className="text-4xl font-serif font-bold text-slate-900">Divorcio Express On-Line</h2>
-              <p className="text-lg text-slate-600 leading-relaxed">
-                Gestionamos su proceso de separación con agilidad y respeto. Especialistas en liquidación de sociedad conyugal y acuerdos sobre hijos menores.
-              </p>
-              <div className="grid grid-cols-2 gap-4">
-                <div className="bg-slate-100 p-4 rounded-xl text-center">
-                  <span className="block font-bold">Mutuo Acuerdo</span>
-                  <span className="text-xs text-slate-500 italic text-xs">Trámite Notarial</span>
-                </div>
-                <div className="bg-slate-100 p-4 rounded-xl text-center">
-                  <span className="block font-bold">Contencioso</span>
-                  <span className="text-xs text-slate-500 italic text-xs">Trámite Judicial</span>
-                </div>
-              </div>
-            </div>
-            <LegalChatbot 
-              businessUnit="Divorcio Express" 
-              contextMessage="Hola. Entiendo su situación. ¿Necesita información sobre los requisitos para un divorcio de mutuo acuerdo?" 
-            />
-          </div>
-        );
-
-      case AppView.PROTECCION_PATRIMONIAL:
-        return (
-          <div className="grid lg:grid-cols-2 gap-12 items-start animate-in fade-in duration-500">
-            <div className="space-y-8">
-              <div className="inline-flex items-center gap-2 bg-green-100 text-green-700 px-4 py-2 rounded-lg font-bold text-sm">
-                <Landmark size={18} /> BLINDAJE JURÍDICO
-              </div>
-              <h2 className="text-4xl font-serif font-bold text-slate-900">Fideicomiso Civil & Sucesiones</h2>
-              <p className="text-lg text-slate-600 leading-relaxed">
-                Proteja sus bienes de terceros y asegure su herencia. El Fideicomiso Civil es la herramienta inembargable por excelencia en Colombia.
-              </p>
-              <div className="p-6 bg-slate-900 text-white rounded-2xl">
-                <h4 className="font-bold text-amber-500 mb-2">Fideicomiso Civil:</h4>
-                <p className="text-sm text-slate-300 italic text-xs">Haga sus bienes inembargables y evite el costo de una sucesión futura mediante la planeación patrimonial.</p>
-              </div>
-            </div>
-            <LegalChatbot 
-              businessUnit="Protección de Bienes" 
-              contextMessage="Bienvenido al área de protección. ¿Sabía que el Fideicomiso Civil protege sus propiedades contra embargos?" 
-            />
-          </div>
-        );
-
-      case AppView.MARCAS_PATENTES:
-        return (
-          <div className="grid lg:grid-cols-2 gap-12 items-start animate-in fade-in duration-500">
-            <div className="space-y-8">
-              <div className="inline-flex items-center gap-2 bg-slate-200 text-slate-700 px-4 py-2 rounded-lg font-bold text-sm">
-                <ShieldCheck size={18} /> PROPIEDAD INTELECTUAL
-              </div>
-              <h2 className="text-4xl font-serif font-bold text-slate-900">Registro de Marcas ante la SIC</h2>
-              <p className="text-lg text-slate-600 leading-relaxed">
-                Su nombre es su mayor activo. Realizamos el estudio de registrabilidad y la gestión completa ante la Superintendencia de Industria y Comercio.
-              </p>
-            </div>
-            <LegalChatbot 
-              businessUnit="Marcas y Patentes" 
-              contextMessage="Hola. Proteger su marca es el primer paso del éxito. ¿Ya tiene un nombre definido para realizar la búsqueda?" 
-            />
-          </div>
-        );
-
-      default:
-        return <Home onNavigate={setActiveView} />;
-    }
+  const irAWhatsApp = () => {
+    const texto = `Hola Elith Lex Group. Estoy en la sección de ${unidad}. Mi duda es: ${msg || 'Deseo asesoría especializada.'}`;
+    window.open(`https://wa.me/${celular}?text=${encodeURIComponent(texto)}`, '_blank');
   };
 
   return (
+    <div className="bg-white rounded-2xl shadow-2xl border border-slate-200 flex flex-col h-[520px] sticky top-24">
+      <div className="bg-slate-900 p-5 rounded-t-2xl flex items-center gap-3">
+        <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+        <span className="text-white font-bold text-sm tracking-tight">LegalBot Elith Lex</span>
+      </div>
+      <div className="flex-1 p-6 bg-slate-50 overflow-y-auto">
+        <div className="bg-white p-5 rounded-2xl shadow-sm border border-slate-100 text-sm text-slate-700 leading-relaxed italic">
+          "{mensaje}"
+        </div>
+      </div>
+      <div className="p-5 border-t bg-white space-y-4">
+        <input 
+          value={msg}
+          onChange={(e) => setMsg(e.target.value)}
+          placeholder="Escriba su consulta técnica..."
+          className="w-full p-3 bg-slate-100 rounded-xl outline-none focus:ring-2 focus:ring-amber-500 text-sm"
+        />
+        <button 
+          onClick={irAWhatsApp}
+          className="w-full bg-green-500 hover:bg-green-600 text-white font-bold py-4 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg active:scale-95"
+        >
+          <MessageCircle size={20} /> CONTACTAR ABOGADO
+        </button>
+      </div>
+    </div>
+  );
+};
+
+// --- 3. COMPONENTE PRINCIPAL (LA ESTRUCTURA) ---
+export default function App() {
+  const [view, setView] = useState<View>('home');
+
+  // El Dashboard con las 4 unidades
+  const Home = () => (
+    <div className="space-y-16 animate-in fade-in duration-700">
+      <header className="text-center max-w-3xl mx-auto space-y-6 pt-10">
+        <h1 className="text-6xl font-serif font-bold text-slate-900 leading-tight">
+          ELITH LEX <span className="text-amber-500 underline decoration-1 underline-offset-8">GROUP</span>
+        </h1>
+        <p className="text-xl text-slate-600 font-light">
+          Alta Gerencia Jurídica. Especialistas en optimización financiera y blindaje patrimonial en Colombia.
+        </p>
+      </header>
+
+      <div className="grid md:grid-cols-2 gap-8">
+        <div onClick={() => setView('creditos')} className="bg-white p-8 rounded-3xl shadow-sm border-t-8 border-amber-500 hover:shadow-2xl transition-all cursor-pointer group">
+          <TrendingDown className="text-amber-600 mb-4" size={40} />
+          <h3 className="text-2xl font-bold text-slate-900 mb-2 font-serif">Ley de Vivienda</h3>
+          <p className="text-slate-500 text-sm">Reducción de créditos hipotecarios y leasing habitacional (Ley 546/99).</p>
+        </div>
+
+        <div onClick={() => setView('divorcio')} className="bg-white p-8 rounded-3xl shadow-sm border-t-8 border-red-600 hover:shadow-2xl transition-all cursor-pointer group">
+          <HeartOff className="text-red-600 mb-4" size={40} />
+          <h3 className="text-2xl font-bold text-slate-900 mb-2 font-serif">Divorcio Express</h3>
+          <p className="text-slate-500 text-sm">Procesos ágiles de mutuo acuerdo y liquidación de sociedad conyugal.</p>
+        </div>
+
+        <div onClick={() => setView('proteccion')} className="bg-white p-8 rounded-3xl shadow-sm border-t-8 border-green-600 hover:shadow-2xl transition-all cursor-pointer group">
+          <Landmark className="text-green-600 mb-4" size={40} />
+          <h3 className="text-2xl font-bold text-slate-900 mb-2 font-serif">Protección de Bienes</h3>
+          <p className="text-slate-500 text-sm">Fideicomiso Civil (Blindaje) y Sucesiones Notariales eficientes.</p>
+        </div>
+
+        <div onClick={() => setView('marcas')} className="bg-white p-8 rounded-3xl shadow-sm border-t-8 border-slate-900 hover:shadow-2xl transition-all cursor-pointer group">
+          <ShieldCheck className="text-slate-900 mb-4" size={40} />
+          <h3 className="text-2xl font-bold text-slate-900 mb-2 font-serif">Marcas y Patentes</h3>
+          <p className="text-slate-500 text-sm">Protección de propiedad intelectual y registros ante la SIC.</p>
+        </div>
+      </div>
+    </div>
+  );
+
+  return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
-      {/* Navegación Superior */}
-      <nav className="bg-slate-900 text-white p-6 shadow-xl sticky top-0 z-50">
+      {/* Barra de Navegación */}
+      <nav className="bg-slate-900 text-white p-6 sticky top-0 z-50 shadow-2xl">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <div className="flex items-center gap-3 cursor-pointer" onClick={() => setActiveView(AppView.HOME)}>
-            <div className="bg-amber-500 p-2 rounded-lg">
+          <div className="flex items-center gap-3 cursor-pointer group" onClick={() => setView('home')}>
+            <div className="bg-amber-500 p-2 rounded-lg group-hover:rotate-12 transition-transform">
                <Scale className="text-slate-900" size={24} />
             </div>
             <span className="font-bold text-2xl tracking-tighter font-serif uppercase">ELITH LEX GROUP</span>
           </div>
-          
-          {activeView !== AppView.HOME && (
-            <button 
-              onClick={() => setActiveView(AppView.HOME)}
-              className="flex items-center gap-2 text-xs font-black uppercase tracking-widest bg-slate-800 px-5 py-3 rounded-full hover:bg-amber-500 hover:text-slate-900 transition-all shadow-lg"
-            >
+          {view !== 'home' && (
+            <button onClick={() => setView('home')} className="flex items-center gap-2 text-[10px] font-black tracking-widest bg-slate-800 px-6 py-3 rounded-full hover:bg-amber-500 hover:text-slate-900 transition-all border border-slate-700">
               <ArrowLeft size={14}/> VOLVER AL INICIO
             </button>
           )}
         </div>
       </nav>
 
-      {/* Área de Contenido Principal */}
+      {/* Contenido Dinámico */}
       <main className="flex-1 max-w-7xl mx-auto p-6 md:p-16 w-full">
-        {renderBusinessUnit()}
+        {view === 'home' && <Home />}
+
+        {view === 'creditos' && (
+          <div className="grid lg:grid-cols-2 gap-12 animate-in fade-in">
+            <div className="space-y-6">
+              <h2 className="text-4xl font-serif font-bold text-slate-900 underline decoration-amber-500">Ley de Vivienda</h2>
+              <p className="text-slate-600 text-lg">Especialistas en la reducción técnica de créditos hipotecarios y leasing habitacional bajo la Ley 546 de 1999.</p>
+              <div className="bg-white p-6 rounded-2xl border-l-8 border-amber-500 shadow-sm">
+                <h4 className="font-bold mb-3">Resultados Técnicos:</h4>
+                <ul className="space-y-2 text-sm text-slate-600 font-medium">
+                  <li>✓ Ahorro de hasta el 40% en intereses totales.</li>
+                  <li>✓ Reducción significativa del tiempo (años de deuda).</li>
+                  <li>✓ Sin pagar anticipos por el estudio financiero.</li>
+                </ul>
+              </div>
+            </div>
+            <ChatbotEje unidad="Ley de Vivienda" mensaje="Hola. Soy su asistente para optimización financiera. ¿Desea que analicemos cuánto tiempo y dinero puede ahorrar en su crédito?" />
+          </div>
+        )}
+
+        {view === 'divorcio' && (
+          <div className="grid lg:grid-cols-2 gap-12 animate-in fade-in">
+            <div className="space-y-6">
+              <h2 className="text-4xl font-serif font-bold text-slate-900 underline decoration-red-600">Divorcio Express</h2>
+              <p className="text-slate-600 text-lg">Soluciones ágiles para procesos de familia. Gestionamos el mutuo acuerdo para evitar desgastes emocionales y económicos.</p>
+              <div className="p-5 bg-red-50 text-red-900 rounded-xl border border-red-100">
+                <p className="text-sm">✓ Liquidación de sociedad conyugal.</p>
+                <p className="text-sm">✓ Acuerdos de custodia y visitas.</p>
+                <p className="text-sm">✓ Trámites notariales en tiempo récord.</p>
+              </div>
+            </div>
+            <ChatbotEje unidad="Divorcio Express" mensaje="Hola. Entiendo que busca un proceso de familia eficiente. ¿Desea conocer los requisitos para el mutuo acuerdo?" />
+          </div>
+        )}
+
+        {view === 'proteccion' && (
+          <div className="grid lg:grid-cols-2 gap-12 animate-in fade-in">
+            <div className="space-y-6">
+              <h2 className="text-4xl font-serif font-bold text-slate-900 underline decoration-green-600">Protección & Sucesiones</h2>
+              <p className="text-slate-600 text-lg">Blindamos su patrimonio contra riesgos legales y organizamos su sucesión para proteger a sus herederos.</p>
+              <div className="space-y-4 font-bold text-slate-800">
+                <div className="p-4 bg-white border rounded-xl shadow-sm">Fideicomiso Civil (Inembargable)</div>
+                <div className="p-4 bg-white border rounded-xl shadow-sm">Sucesiones Notariales & Judiciales</div>
+              </div>
+            </div>
+            <ChatbotEje unidad="Protección de Bienes" mensaje="Bienvenido. Soy especialista en blindaje patrimonial. ¿Sabía que puede proteger su casa de embargos legalmente?" />
+          </div>
+        )}
+
+        {view === 'marcas' && (
+          <div className="grid lg:grid-cols-2 gap-12 animate-in fade-in">
+            <div className="space-y-6">
+              <h2 className="text-4xl font-serif font-bold text-slate-900 underline decoration-slate-900">Marcas y Patentes</h2>
+              <p className="text-slate-600 text-lg">Protegemos su identidad corporativa. Gestión profesional ante la Superintendencia de Industria y Comercio (SIC).</p>
+            </div>
+            <ChatbotEje unidad="Marcas y Patentes" mensaje="Hola. El activo más valioso de su empresa es su marca. ¿Desea que realicemos la búsqueda de antecedentes?" />
+          </div>
+        )}
       </main>
 
-      {/* Footer Minimalista */}
-      <footer className="bg-white border-t py-8 text-center text-slate-400 text-[10px] tracking-[0.2em] uppercase">
-        © 2025 ELITH LEX GROUP | Consultoría Legal de Alta Gerencia | Colombia
+      <footer className="py-10 text-center text-slate-400 text-[10px] uppercase tracking-[0.4em] border-t bg-white">
+        © 2025 ELITH LEX GROUP | Excelencia Legal en Colombia
       </footer>
     </div>
   );
-};
-
-export default App;
+}
