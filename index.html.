@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elith Lex Group | Justicia Digital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;900&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+</head>
+<body class="bg-[#fcfcfc] text-slate-900">
+
+    <nav class="border-b p-5 bg-white/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto flex justify-between items-center">
+            <div class="font-black italic text-xl tracking-tighter uppercase">
+                ELITH <span class="text-emerald-500">LEX GROUP</span>
+            </div>
+            <a href="https://wa.me/573132922973" class="bg-black text-white px-6 py-2 rounded-full text-[10px] font-black uppercase tracking-widest no-underline">WhatsApp</a>
+        </div>
+    </nav>
+
+    <main class="max-w-5xl mx-auto px-6 py-20 text-center">
+        <span class="bg-slate-100 px-4 py-1.5 rounded-full text-[9px] font-black uppercase tracking-widest text-slate-500">Justicia Digital • +10 Años de Experiencia</span>
+        <h1 class="text-6xl md:text-8xl font-black tracking-tighter italic leading-none my-10 uppercase">Justicia <br><span class="text-emerald-500">Inteligente.</span></h1>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-20">
+            <div class="p-10 border border-slate-100 rounded-[3rem] bg-white shadow-sm hover:shadow-2xl transition-all text-left">
+                <div class="text-3xl mb-4">⚖️</div>
+                <h3 class="font-black italic uppercase text-xl text-emerald-600">Divorcio Express</h3>
+                <p class="text-slate-500 text-sm mt-2 italic font-medium leading-relaxed">Mutuo acuerdo digital. Rápido y económico para colombianos en todo el mundo.</p>
+            </div>
+            <div class="p-10 border border-slate-100 rounded-[3rem] bg-white shadow-sm hover:shadow-2xl transition-all text-left">
+                <div class="text-3xl mb-4">📉</div>
+                <h3 class="font-black italic uppercase text-xl text-emerald-600">Ley de Vivienda</h3>
+                <p class="text-slate-500 text-sm mt-2 italic font-medium leading-relaxed">Reducción de intereses hipotecarios. Cobramos solo al éxito (Ley 546/99).</p>
+            </div>
+            <div class="p-10 border border-slate-100 rounded-[3rem] bg-white shadow-sm hover:shadow-2xl transition-all text-left">
+                <div class="text-3xl mb-4">🛡️</div>
+                <h3 class="font-black italic uppercase text-xl text-emerald-600">Fideicomiso Civil</h3>
+                <p class="text-slate-500 text-sm mt-2 italic font-medium leading-relaxed">Blindaje total contra embargos. Proteja su patrimonio de forma segura.</p>
+            </div>
+            <div class="p-10 border border-slate-100 rounded-[3rem] bg-white shadow-sm hover:shadow-2xl transition-all text-left">
+                <div class="text-3xl mb-4">®️</div>
+                <h3 class="font-black italic uppercase text-xl text-emerald-600">Marcas & Patentes</h3>
+                <p class="text-slate-500 text-sm mt-2 italic font-medium leading-relaxed">Registro ante la SIC en 10 minutos. Vigilancia legal por 10 años.</p>
+            </div>
+        </div>
+
+        <div class="mt-20 p-12 border-2 border-emerald-500 rounded-[4rem] bg-white max-w-lg mx-auto shadow-2xl">
+            <h2 class="font-black italic uppercase text-3xl mb-8">Canales de Pago</h2>
+            <div class="space-y-4">
+                <div class="p-6 bg-slate-50 rounded-2xl text-left border border-slate-100">
+                    <p class="text-[9px] font-black text-slate-400 uppercase italic mb-1">Nequi / Daviplata</p>
+                    <p class="font-black text-2xl italic text-slate-800">313 292 2973</p>
+                </div>
+                <div class="p-6 bg-slate-50 rounded-2xl text-left border border-slate-100">
+                    <p class="text-[9px] font-black text-slate-400 uppercase italic mb-1">Referencia Llave Breve</p>
+                    <p class="font-black text-2xl italic text-slate-800">79396055</p>
+                </div>
+            </div>
+            <p class="text-[10px] mt-6 font-bold text-slate-400 uppercase tracking-widest italic">Envía tu comprobante por WhatsApp</p>
+        </div>
+    </main>
+
+    <footer class="py-20 text-center opacity-30 text-[9px] font-black uppercase tracking-[0.4em] italic">
+        © 2025 ELITH LEX GROUP • BOGOTÁ, COLOMBIA
+    </footer>
+
+    <a href="https://wa.me/573132922973" target="_blank" class="fixed bottom-8 right-8 bg-[#25D366] text-white w-16 h-16 rounded-full flex items-center justify-center text-3xl shadow-2xl transition-transform hover:scale-110 z-50">
+        📱
+    </a>
+
+</body>
+</html>
