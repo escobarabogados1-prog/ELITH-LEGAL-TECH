@@ -60,4 +60,4 @@ export default function App() {
               <div onClick={() => setView('creditos')} className={cardStyle}>
                 <div className="bg-emerald-50 p-4 rounded-2xl text-emerald-600 w-fit"><TrendingDown size={30}/></div>
                 <h3 className="text-3xl font-black uppercase italic tracking-tighter">Reducción Crédito</h3>
-                <p className="text-slate-500 text
+                <p className="text-slate-500 text        
