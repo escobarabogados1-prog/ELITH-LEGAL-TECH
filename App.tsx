@@ -144,4 +144,12 @@ export default function App() {
 
       {/* FOOTER CORPORATIVO */}
       <footer className="bg-white py-20 border-t border-slate-200 text-center mt-20">
-        <div className="flex justify-
+        <div className="flex justify-center items-center gap-2 mb-4">
+          <Scale className="text-emerald-500" size={24} />
+          <span className="font-black text-2xl italic tracking-tighter">ELITH LEX GROUP</span>
+        </div>
+        <p className="text-slate-400 text-[10px] font-bold tracking-[0.5em] uppercase">Infraestructura Legal Tech · Colombia 2025</p>
+      </footer>
+    </div>
+  );
+}
